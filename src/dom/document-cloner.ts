@@ -287,11 +287,14 @@ export class DocumentCloner {
     }
 
     cloneChildNodes(node: Element, clone: HTMLElement | SVGElement, copyStyles: boolean): void {
+
         for (
-            let child = node.shadowRoot ? node.shadowRoot.firstChild : node.firstChild;
-            child;
-            child = child.nextSibling
+            let i = 0;
+            i < node.childNodes.length;
+            i++
         ) {
+            let child = node.childNodes[i];
+            
             if (isElementNode(child) && isSlotElement(child) && typeof child.assignedNodes === 'function') {
                 const assignedNodes = child.assignedNodes() as ChildNode[];
                 if (assignedNodes.length) {
